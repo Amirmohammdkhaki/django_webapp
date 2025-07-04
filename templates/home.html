@@ -1,0 +1,51 @@
+{% extends '_base.html' %}
+
+{% block page_title %}
+    home_page
+{% endblock %}
+ 
+{% block content %}
+<h1>home</h1>
+{% if user.is_authenticated %}
+    <div class="welcome-section">
+        <span class="welcome-text">welcome {{ user.username }}</span>
+        <span class="separator">|</span>
+        <form action="{% url 'logout' %}" method="post" class="logout-form">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">logout</button>
+        </form>
+    </div>
+{% else %}
+    <div class="auth-links">
+        <a href="{% url 'login' %}" class="login-link">Login</a>
+        <span class="separator">|</span>
+        <a href="{% url 'signup' %}" class="signup-link">signup</a>
+    </div>
+{% endif %}
+
+<style>
+    .welcome-section, .auth-links {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .logout-btn {
+        background: none;
+        border: none;
+        color: #007bff;
+        cursor: pointer;
+        padding: 0;
+        font: inherit;
+        text-decoration: underline;
+    }
+    
+    .logout-btn:hover {
+        color: #0056b3;
+    }
+    
+    .separator {
+        color: #6c757d;
+    }
+</style>
+{% endblock %}

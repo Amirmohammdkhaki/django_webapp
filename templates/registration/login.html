@@ -1,0 +1,53 @@
+{% extends '_base.html' %}
+
+{% block page_title %}
+    login
+{% endblock %}
+
+{% block content %}
+<style>
+    /* استایل برای قرار دادن محتوا در وسط صفحه */
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        background-color: #f0f4f8; /* رنگ پس‌زمینه ملایم */
+        font-family: Arial, sans-serif;
+    }
+
+    /* استایل برای فرم */
+    form {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        width: 100%;
+        max-width: 500px; /* بزرگ‌تر کردن عرض فرم */
+        text-align: center;
+    }
+
+    /* استایل برای دکمه */
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 15px;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+</style>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
+{% endblock %}

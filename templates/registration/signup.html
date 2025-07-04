@@ -1,0 +1,111 @@
+{% extends '_base.html' %}
+
+{% block page_title %}Signup{% endblock %}
+
+{% block content %}
+<div class="signup-container">
+    <form class="signup-form" method="POST">
+        {% csrf_token %}
+        
+        <h2>Create Account</h2>
+        
+        {{ form.as_p }}
+        
+        <button type="submit" class="submit-btn">Sign Up</button>
+        
+        <p class="login-link">
+            Already have an account? <a href="{% url 'login' %}">Login</a>
+        </p>
+    </form>
+</div>
+
+<style>
+    /* Main Container */
+    .signup-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        background-color: #f0f4f8;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Form Styles */
+    .signup-form {
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .signup-form h2 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        color: #333;
+    }
+
+    /* Form Fields */
+    .signup-form p {
+        margin-bottom: 1rem;
+    }
+
+    .signup-form label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+    }
+
+    .signup-form input {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    /* Button Styles */
+    .submit-btn {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 1rem;
+        font-size: 1rem;
+        transition: background-color 0.3s;
+    }
+
+    .submit-btn:hover {
+        background-color: #45a049;
+    }
+
+    /* Login Link */
+    .login-link {
+        text-align: center;
+        margin-top: 1.5rem;
+        color: #666;
+    }
+
+    .login-link a {
+        color: #4CAF50;
+        text-decoration: none;
+    }
+
+    .login-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* Error Messages */
+    .errorlist {
+        color: #d9534f;
+        margin-top: 0.25rem;
+        padding-left: 0;
+        list-style: none;
+    }
+</style>
+{% endblock %}
