@@ -11,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Security
 SECRET_KEY = 'django-insecure-4jid!iyi%6mz2#l_2@dcki-g56u+z3jgkkw4y57^u*lqiwsz9d'
 DEBUG = True
-ALLOWED_HOSTS = ['*']  # برای توسعه - در تولید محدود کنید
+ALLOWED_HOSTS = ['*']  # For development - restrict in production
 
 # Apps
 INSTALLED_APPS = [
@@ -78,8 +78,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Internationalization
-LANGUAGE_CODE = 'fa-ir'  # فارسی
-TIME_ZONE = 'Asia/Tehran'
+LANGUAGE_CODE = 'en-us'  # Changed to English
+TIME_ZONE = 'UTC'  # Changed to UTC
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
