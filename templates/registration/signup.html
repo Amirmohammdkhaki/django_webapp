@@ -1,15 +1,25 @@
 {% extends '_base.html' %}
+
 {% load crispy_forms_tags static %}
 
-{% block page_title %}Login | ElegantApp{% endblock %}
+{% block page_title %}Sign Up | ElegantApp{% endblock %}
 
 {% block extra_head %}
+<!-- فونت‌های گوگل و آیکن‌های Font Awesome -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <style>
-    /* Main container styling */
+    :root {
+        --primary-color: #6c5ce7;
+        --primary-dark: #5649c0;
+        --text-color: #2d3436;
+        --text-light: #636e72;
+        --border-color: rgba(0, 0, 0, 0.1);
+    }
+    
     body {
-        background-color: #f8f9fa;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
         font-family: 'Montserrat', sans-serif;
         display: flex;
         justify-content: center;
@@ -18,98 +28,145 @@
         margin: 0;
         padding: 20px;
     }
-    
-    /* Compact card styling */
-    .login-card {
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+
+    .signup-container {
         width: 100%;
-        max-width: 400px;
-        padding: 30px;
-        border: 1px solid rgba(0, 0, 0, 0.05);
+        max-width: 450px;
     }
-    
-    /* Card header */
+
+    .signup-card {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        border: none;
+        animation: fadeIn 0.5s ease-out;
+    }
+
     .card-header {
+        background: var(--primary-color);
+        color: white;
+        padding: 30px;
         text-align: center;
-        margin-bottom: 20px;
     }
-    
+
     .card-header h2 {
         font-family: 'Playfair Display', serif;
-        color: #2d3436;
-        margin-bottom: 5px;
-        font-size: 24px;
+        margin: 0;
+        font-size: 28px;
+        font-weight: 700;
     }
-    
+
     .card-header p {
-        color: #636e72;
+        margin: 8px 0 0;
+        opacity: 0.9;
         font-size: 14px;
     }
-    
-    /* Form styling */
-    .card-form {
-        margin-top: 15px;
+
+    .card-body {
+        padding: 30px;
     }
-    
-    /* Button styling */
-    .btn-login {
+
+    /* فرم */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        border-radius: 6px;
+        border: 1px solid var(--border-color);
+        padding: 12px 15px;
+        font-size: 14px;
         width: 100%;
-        padding: 10px;
-        background: #6c5ce7;
+        transition: all 0.3s;
+    }
+    .form-control:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+        outline: none;
+    }
+
+    /* دکمه ثبت‌نام */
+    .btn-signup {
+        width: 100%;
+        padding: 12px;
+        background: var(--primary-color);
         border: none;
         color: white;
         font-weight: 600;
         border-radius: 6px;
         cursor: pointer;
-        transition: all 0.2s ease;
-        margin-top: 15px;
-        font-size: 14px;
+        transition: all 0.3s ease;
+        font-size: 15px;
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
-    
-    .btn-login:hover {
-        background: #5649c0;
+    .btn-signup:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
     }
-    
-    /* Link styling */
+    .btn-signup i {
+        margin-right: 8px;
+    }
+
+    /* پاورقی کارت */
     .card-footer {
         text-align: center;
-        margin-top: 20px;
-        color: #636e72;
-        font-size: 13px;
+        padding: 20px 30px;
+        border-top: 1px solid var(--border-color);
+        background: #f9f9f9;
+        font-size: 14px;
     }
-    
+
     .card-footer a {
-        color: #6c5ce7;
-        font-weight: 500;
+        color: var(--primary-color);
+        font-weight: 600;
         text-decoration: none;
+        transition: all 0.2s;
     }
-    
+
     .card-footer a:hover {
         text-decoration: underline;
+        color: var(--primary-dark);
+    }
+
+    /* انیمیشن نمایش */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 576px) {
+        .card-header, .card-body, .card-footer {
+            padding: 25px;
+        }
     }
 </style>
 {% endblock extra_head %}
 
 {% block content %}
-<div class="login-card">
-    <div class="card-header">
-        <h2>Welcome Back</h2>
-        <p>Sign in to your account</p>
-    </div>
-    
-    <div class="card-form">
-        <form method="post">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <button class="btn-login" type="submit">
-                <i class="fas fa-sign-in-alt"></i> Login
-            </button>
-        </form>
+<div class="signup-container">
+    <div class="signup-card">
+        <div class="card-header">
+            <h2>Create Account</h2>
+            <p>Join us to get started</p>
+        </div>
+        
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button class="btn-signup" type="submit">
+                    <i class="fas fa-user-plus"></i> Sign Up
+                </button>
+            </form>
+        </div>
         
         <div class="card-footer">
-            Don't have an account? <a href="{% url 'signup' %}">Sign Up</a>
+            Already have an account? <a href="{% url 'login' %}">Log in</a> | 
+            <a href="{% url 'home' %}">Back to home</a>
         </div>
     </div>
 </div>
